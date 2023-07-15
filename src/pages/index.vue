@@ -1,7 +1,10 @@
 <script setup lang="ts">
+import { useCursor } from 'ipad-cursor/vue'
+
 defineOptions({
   name: 'IndexPage',
 })
+useCursor()
 const user = useUserStore()
 const name = ref(user.savedName)
 
@@ -17,7 +20,7 @@ const { t } = useI18n()
 <template>
   <div>
     <div text-4xl>
-      <div i-carbon-campsite inline-block />
+      <div i-carbon-campsite inline-block data-cursor="block" />
     </div>
     <p>
       <a rel="noreferrer" href="https://github.com/antfu/vitesse" target="_blank">
@@ -34,18 +37,20 @@ const { t } = useI18n()
       v-model="name"
       :placeholder="t('intro.whats-your-name')"
       autocomplete="false"
+      data-cursor="text"
       @keydown.enter="go"
     />
     <label class="hidden" for="input">{{ t('intro.whats-your-name') }}</label>
 
     <div>
-      <button
-        m-3 text-sm btn
+      <div
+        m-3 cursor-none text-sm btn
         :disabled="!name"
+        data-cursor="block"
         @click="go"
       >
         {{ t('button.go') }}
-      </button>
+      </div>
     </div>
   </div>
 </template>
